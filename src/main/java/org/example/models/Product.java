@@ -17,6 +17,7 @@ public class Product {
     private String category;
     private Double rating = 0.0;
 
+
     // Празен конструктор (задължителен за Hibernate)
     public Product() {}
 

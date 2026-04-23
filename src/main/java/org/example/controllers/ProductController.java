@@ -60,4 +60,20 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    // 4. Обновяване на ЦЕЛИЯ продукт (име, цена, категория и т.н.)
+    @PutMapping("/{id}")
+    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+        return productRepository.findById(id).map(existingProduct -> {
+            // Обновяваме полетата със стойностите, изпратени от Vue
+            existingProduct.setName(productDetails.getName());
+            existingProduct.setPrice(productDetails.getPrice());
+            existingProduct.setDescription(productDetails.getDescription());
+            existingProduct.setImageUrl(productDetails.getImageUrl());
+            existingProduct.setCategory(productDetails.getCategory());
+
+            // Запазваме обновения продукт в базата данни
+            Product savedProduct = productRepository.save(existingProduct);
+            return ResponseEntity.ok(savedProduct);
+        }).orElse(ResponseEntity.notFound().build());
+    }
 }
