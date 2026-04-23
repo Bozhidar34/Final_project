@@ -15,9 +15,18 @@ public class Product {
     private double price;
     private String imageUrl = "";
     private String category;
+    private Double rating = 0.0;
 
     // Празен конструктор (задължителен за Hibernate)
     public Product() {}
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
     // Гетъри и Сетъри
     public Long getId() {
